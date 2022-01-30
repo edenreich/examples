@@ -54,11 +54,11 @@ export const getStaticProps: GetStaticProps = async (
   const page: Page = mockedPages.filter(
     (page) => page.slug === context.params?.slug
   )[0];
-
   return {
     props: {
       ...page,
     },
+    revalidate: 30,
   };
 };
 

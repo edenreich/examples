@@ -8,6 +8,7 @@ import type {
 } from "next";
 import Head from "next/head";
 import { PropsWithChildren } from "react";
+import { promises } from "fs";
 
 type Request = {
   slug: string | string[];
@@ -19,18 +20,13 @@ type Page = {
   content: string;
 };
 
-const mockedPages: Page[] = [
-  {
-    slug: "about",
-    title: "About",
-    content: "About page",
-  },
-  {
-    slug: "contact",
-    title: "Contact",
-    content: "Contact page",
-  },
-];
+const getPages = async (): Promise<Page[]> => {
+  return JSON.parse(
+    await promises.readFile("./data/pages.json", {
+      encoding: "utf-8",
+    })
+  ) as unknown as Page[];
+};
 
 export const getStaticPaths: GetStaticPaths = async (): Promise<
   GetStaticPathsResult<Request>
@@ -38,12 +34,13 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<
   // Get all existing paths from an API for generating static pages ahead of time
   // Probably use Contentful API to get this data
   // But for now let's mock that data
+  const mockedPages: Page[] = await getPages();
   const allPossiblePaths = mockedPages.map((page) => ({
     params: { slug: page.slug },
   }));
   return {
     paths: allPossiblePaths,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -51,6 +48,7 @@ export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<Page>> => {
   // Lookup for a page by slug, this is where you'd use Contentful API
+  const mockedPages: Page[] = await getPages();
   const page: Page = mockedPages.filter(
     (page) => page.slug === context.params?.slug
   )[0];
@@ -63,15 +61,19 @@ export const getStaticProps: GetStaticProps = async (
   };
 };
 
-const Blog: NextPage<Page> = ({ title, content }: PropsWithChildren<Page>) => {
+const Blog: NextPage<Page> = (page: PropsWithChildren<Page>) => {
+  if (!page) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Head>
-        <title>{title}</title>
-        <meta name="description" content={title} />
+        <title>{page.title}</title>
+        <meta name="description" content={page.title} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>{content}</main>
+      <main>{page.content}</main>
       <footer></footer>
     </div>
   );

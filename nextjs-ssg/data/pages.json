@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "about",
+    "title": "About",
+    "content": "About page"
+  },
+  {
+    "slug": "contact",
+    "title": "Contact",
+    "content": "Contact page"
+  },
+  {
+    "slug": "not-known-at-build-time",
+    "title": "Example",
+    "content": "Example page"
+  }
+]

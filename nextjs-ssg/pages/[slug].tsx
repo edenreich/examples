@@ -54,6 +54,7 @@ export const getStaticProps: GetStaticProps = async (
   const page: Page = mockedPages.filter(
     (page) => page.slug === context.params?.slug
   )[0];
+  console.log("called");
   return {
     props: {
       ...page,

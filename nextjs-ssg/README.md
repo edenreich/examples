@@ -2,7 +2,7 @@
 ## NextJS Static Site Generator(SSG)
 
 Short example on how to develop a NextJS application with docker.
-This example focuses on Static Site Generator(SSG), and its purpose is to give overview of the progress of the following [blog post](https://www.eden-reich.com/engineering-blog/build-a-blazing-fast-blog-using-nextjs-ssg/).
+This example focuses on Static Site Generator(SSG), and its purpose is to give an overview of the progress for the following [blog post](https://www.eden-reich.com/engineering-blog/build-a-blazing-fast-blog-using-nextjs-ssg/).
 
 To work on development:
 

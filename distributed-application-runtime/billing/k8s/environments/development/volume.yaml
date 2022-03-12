@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: billing
+  name: billing
+spec:
+  selector:
+    matchLabels:
+      app: billing
+  template:
+    spec:
+      containers:
+      - name: billing
+        volumeMounts:
+        - name: source-code
+          mountPath: /usr/src/app
+      volumes:
+      - name: source-code
+        hostPath:
+          path: /apps/billing

@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: shipping
+  name: shipping
+spec:
+  selector:
+    matchLabels:
+      app: shipping
+  template:
+    spec:
+      containers:
+      - name: shipping
+        volumeMounts:
+        - name: source-code
+          mountPath: /usr/src/app
+      volumes:
+      - name: source-code
+        hostPath:
+          path: /apps/shipping

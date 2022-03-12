@@ -1,0 +1,9 @@
+---
+bases:
+  - ../../base
+
+namespace: staging
+
+images:
+  - name: default-registry:5432/notification
+    newTag: 1.0.0

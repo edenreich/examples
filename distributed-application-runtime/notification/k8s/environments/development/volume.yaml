@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: notification
+  name: notification
+spec:
+  selector:
+    matchLabels:
+      app: notification
+  template:
+    spec:
+      containers:
+      - name: notification
+        volumeMounts:
+        - name: source-code
+          mountPath: /usr/src/app
+      volumes:
+      - name: source-code
+        hostPath:
+          path: /apps/notification

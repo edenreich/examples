@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: billing
+  name: billing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: billing
+  template:
+    metadata:
+      labels:
+        app: billing
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "billing"
+        dapr.io/app-port: "8080"
+    spec:
+      containers:
+      - name: billing
+        image: default-registry:5432/billing:1.0.0
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        envFrom:
+        - configMapRef:
+            name: billing
+        securityContext:
+          allowPrivilegeEscalation: false
+        imagePullPolicy: Always

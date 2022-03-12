@@ -1,0 +1,9 @@
+---
+bases:
+  - ../../base
+
+namespace: staging
+
+images:
+  - name: default-registry:5432/order
+    newTag: 1.0.0

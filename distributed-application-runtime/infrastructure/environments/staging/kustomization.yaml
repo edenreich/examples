@@ -1,0 +1,9 @@
+---
+bases:
+  - ../../base
+
+namespace: staging
+
+patches:
+  - pubsub.yaml
+  - statestore.yaml

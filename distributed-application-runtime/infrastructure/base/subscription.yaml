@@ -1,0 +1,24 @@
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: order-subscription
+spec:
+  topic: orders
+  route: /orders
+  pubsubname: pubsub
+scopes:
+- notification
+- billing
+- shipping
+---
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: billing-subscription
+spec:
+  topic: bills
+  route: /bills
+  pubsubname: pubsub
+scopes:
+- order

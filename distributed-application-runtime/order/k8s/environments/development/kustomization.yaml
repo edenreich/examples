@@ -1,0 +1,12 @@
+---
+bases:
+  - ../../base
+
+namespace: development
+
+patches:
+  - volume.yaml
+
+images:
+  - name: default-registry:5432/order
+    newTag: development

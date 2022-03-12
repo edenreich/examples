@@ -1,0 +1,9 @@
+---
+bases:
+  - ../../base
+
+namespace: production
+
+images:
+  - name: default-registry:5432/shipping
+    newTag: 1.0.0

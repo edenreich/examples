@@ -9,3 +9,9 @@ spec:
   metadata:
   - name: redisHost
     value: redis-master.staging.svc.cluster.local:6379
+  - name: redisPassword
+    secretKeyRef:
+      name: redis
+      key: redis-password
+auth:
+  secretStore: kubernetes

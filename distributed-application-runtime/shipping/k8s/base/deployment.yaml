@@ -15,6 +15,7 @@ spec:
       labels:
         app: shipping
       annotations:
+        dapr.io/config: "tracing"
         dapr.io/enabled: "true"
         dapr.io/app-id: "shipping"
         dapr.io/app-port: "8080"

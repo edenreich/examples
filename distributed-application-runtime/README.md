@@ -98,12 +98,18 @@ D[Notification] --> E(Customer)
 ```
 
 For the observability part let's deploy Zipkin, it's a tool that will help us to detect on which service we have a bottle neck.
+(Note that we deployed configuration for zipkin tracing beforehand, if you don't need tracing you can remove this config file)
 
 ```sh
 kubectl create namespace tracing
 kubectl --namespace tracing create deployment zipkin --image=openzipkin/zipkin
 kubectl --namespace tracing expose deployment zipkin --type ClusterIP --port 9411
 kubectl --namespace tracing rollout status deployment zipkin
-kubectl apply -f infrastructure/tracing.yaml
 kubectl --namespace tracing get all
+```
+
+All we need to do in order to enable tracing on the particular deployments is add the annotations(already enabled, if you don't want tracing simply remove this annotation and redeploy):
+
+```yaml
+dapr.io/config: "tracing"
 ```

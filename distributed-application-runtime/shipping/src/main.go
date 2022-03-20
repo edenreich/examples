@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/cloudevents/sdk-go/pkg/cloudevents"
 	"github.com/google/uuid"
@@ -41,6 +42,7 @@ type Order struct {
 	Billing   Billing    `json:"billing"`
 	Shipping  Shipping   `json:"shipping"`
 	Customer  Customer   `json:"customer"`
+	PaidAt    time.Time  `json:"paid_at"`
 }
 
 func main() {
@@ -87,6 +89,12 @@ func eventHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println("Error unmarshalling event data from bytes: ", order)
 		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	if order.PaidAt.IsZero() {
+		log.Printf("Order %s is not paid yet...\n", order.Id)
+		w.WriteHeader(http.StatusNoContent)
 		return
 	}
 

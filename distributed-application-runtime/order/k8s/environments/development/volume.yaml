@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: order
+  name: order
+spec:
+  selector:
+    matchLabels:
+      app: order
+  template:
+    spec:
+      containers:
+      - name: order
+        volumeMounts:
+        - name: source-code
+          mountPath: /usr/src/app
+      volumes:
+      - name: source-code
+        hostPath:
+          path: /apps/order

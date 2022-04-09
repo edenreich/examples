@@ -1,0 +1,6 @@
+---
+resources:
+  - pubsub.yaml
+  - statestore.yaml
+  - subscription.yaml
+  - tracing.yaml

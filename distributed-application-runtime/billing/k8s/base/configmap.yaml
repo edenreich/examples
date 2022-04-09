@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: billing
+  labels:
+    app: billing
+data:
+  PUBSUB_NAME: pubsub
+  TOPICS: bills
+  DAPR_VERSION: "v1.0"

@@ -1,0 +1,9 @@
+---
+bases:
+  - ../../base
+
+namespace: development
+
+patches:
+  - pubsub.yaml
+  - statestore.yaml
